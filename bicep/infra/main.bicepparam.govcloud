@@ -1,0 +1,54 @@
+using './main.bicep'
+
+// ============================================================================
+// MINIMAL Azure Government Configuration
+// ============================================================================
+// Reduced configuration to stay under 4MB template size limit
+
+param deployToggles = {
+  // AI Services - minimal
+  aiFoundry: true
+  searchService: false              // Disable to reduce size
+  groundingWithBingSearch: false
+  
+  // Data & Storage - minimal
+  cosmosDb: false                   // Disable to reduce size
+  storageAccount: true
+  keyVault: true
+  appConfig: false
+  
+  // Container & Compute - disable all
+  containerEnv: false
+  containerRegistry: false
+  containerApps: false
+  buildVm: false
+  jumpVm: false
+  bastionHost: false
+  
+  // Monitoring - minimal
+  logAnalytics: true
+  appInsights: false                // Disable to reduce size
+  
+  // Networking
+  virtualNetwork: true
+  firewall: false
+  applicationGateway: false
+  applicationGatewayPublicIp: false
+  wafPolicy: false
+  userDefinedRoutes: false
+  apiManagement: false
+  
+  // NSGs - disable all
+  agentNsg: false
+  peNsg: false
+  applicationGatewayNsg: false
+  apiManagementNsg: false
+  acaEnvironmentNsg: false
+  jumpboxNsg: false
+  devopsBuildAgentsNsg: false
+  bastionNsg: false
+}
+
+param resourceIds = {}
+
+param flagPlatformLandingZone = false
